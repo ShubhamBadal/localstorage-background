@@ -1,0 +1,59 @@
+<!doctype html>
+<html>
+<head>
+	
+	<meta charset="utf-8">
+	<title>Localstorage Background</title>
+    <meta name="description" content="Create custom background functionality using HTML5 localstorage">
+    <meta name="author" content="CybrHome">
+    <meta name="product" content="localstorage-background">
+    <meta name="keywords" content="html5 localstorage, css background, custom bg, custom background, background plugin, localstorage background">
+
+	<script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+
+</head>
+
+<body>
+
+	<input id="backgroundbtn" type="file" onchange="loadImageFile(this)" accept="image/*"/><br><br>
+	<button onClick="defaultbg()">Clear</button>
+
+	<script>
+		$(switchBackground);
+		var oFReader = new FileReader(),
+		rFilter = /^(?:image\/bmp|image\/cis\-cod|image\/gif|image\/ief|image\/jpeg|image\/jpeg|image\/jpeg|image\/pipeg|image\/png|image\/svg\+xml|image\/tiff|image\/x\-cmu\-raster|image\/x\-cmx|image\/x\-icon|image\/x\-portable\-anymap|image\/x\-portable\-bitmap|image\/x\-portable\-graymap|image\/x\-portable\-pixmap|image\/x\-rgb|image\/x\-xbitmap|image\/x\-xpixmap|image\/x\-xwindowdump)$/i;
+		
+		oFReader.onload = function(oFREvent) {
+		localStorage.setItem('bgimg', oFREvent.target.result);
+		openBackground();
+		};
+		
+		function openBackground() {
+		var backgroundImage = localStorage.getItem('bgimg');
+			if (backgroundImage!=null || backgroundImage!="") {
+				$('body').css('background-image', 'url(' + backgroundImage + ')');
+			}
+			else {
+				$('body').css('background-image', 'none');
+			}
+		}
+		
+		function loadImageFile(testEl) {
+			if (! testEl.files.length) { return; }
+			var oFile = backgroundbtn.files[0];
+			if (!rFilter.test(oFile.type)) { alert("You must select a valid image file!"); return; }
+			oFReader.readAsDataURL(oFile);
+		}
+		
+		function switchBackground() {
+		$('body').css('background-image', "url(" + localStorage.getItem('bgimg') + ')');
+		}
+		
+		function defaultbg() {
+		$("body").css("background-image","none");
+		localStorage.removeItem('bgimg');
+		}
+	</script>
+
+</body>
+</html>
