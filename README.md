@@ -1,6 +1,12 @@
-# utility.css
+# Localstorage Background
 
 > Easily create custom background functionality for your webpage using HTML5 localstorage
+
+
+## Live Demo
+
+Try out the live demo [here](https://shubhambadal.github.io/localstorage-background/).
+
 
 ## Intro
 
